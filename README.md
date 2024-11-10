@@ -48,7 +48,6 @@ The system employs two specialized models for code similarity detection:
   - Understands data flow graphs
   - Better at detecting structural similarities
   - Can identify similar algorithms even with different implementations
-- Threshold: > 70% similarity score triggers a match
 
 ### Embedding Process
 The system uses a sophisticated embedding approach:
@@ -86,12 +85,10 @@ The system uses three methods in parallel:
 
 2. **CodeBERT Semantic Analysis**
    - Used for semantic similarity
-   - Threshold: 0.7 (70% similarity)
    - Better at detecting logic similarity
 
 3. **GraphCodeBERT Structural Analysis**
    - Used for structural similarity
-   - Threshold: 0.7 (70% similarity)
    - Better at detecting algorithm similarity
 
 ### Result Processing
