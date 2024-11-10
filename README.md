@@ -40,7 +40,6 @@ The system employs two specialized models for code similarity detection:
   - Understands code semantics
   - Can detect plagiarism even with variable renaming
   - Better at understanding code structure
-  - Threshold: > 70% similarity score triggers a match
 
 #### GraphCodeBERT Model
 - Purpose: Secondary code similarity detection with focus on code structure
@@ -78,7 +77,6 @@ The system uses three methods in parallel:
 
 1. **Traditional N-gram Matching**
    - Used for exact or near-exact matches
-   - Threshold: 0.6 (60% similarity)
    ```python
    def get_ngrams(code: str, n: int = 5) -> List[str]:
        tokens = code.split()
