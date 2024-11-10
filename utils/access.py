@@ -4,6 +4,7 @@ import fitz
 from config import settings
 from utils.shared import databricks_api
 import base64
+
 def download_file_from_dbfs(dbfs_path: str):
     offset = 0
     binary_content = bytearray()

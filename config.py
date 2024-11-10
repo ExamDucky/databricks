@@ -16,6 +16,8 @@ class Settings(BaseSettings):
     OAUTH_TOKEN_CODE: str
     graphcodebert_url: str
     OAUTH_TOKEN_GRAPH: str
+    DATABRICKS_OAUTH_TOKEN: str
+    CODE_BERT_URL: str
 
     class Config:
         env_file = ".env"  # Specify the path to your .env file

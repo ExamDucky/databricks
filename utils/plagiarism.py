@@ -19,6 +19,8 @@ os.environ["DATABRICKS_HOST"] = settings.DATABRICKS_URL
 os.environ["DATABRICKS_TOKEN"] = settings.TOKEN
 os.environ["OAUTH_TOKEN_CODE"] = settings.OAUTH_TOKEN_CODE
 os.environ["OAUTH_TOKEN_GRAPH"] = settings.OAUTH_TOKEN_GRAPH
+os.environ["DATABRICKS_OAUTH_TOKEN"] = settings.DATABRICKS_OAUTH_TOKEN
+
 headers_code = {
     "Authorization": f"Bearer {settings.OAUTH_TOKEN_CODE}",
     "Content-Type": "application/json"
@@ -46,6 +48,15 @@ def get_ngrams(code: str, n: int = 5) -> List[str]:
     ngrams = zip(*[tokens[i:] for i in range(n)])
     return [' '.join(ngram) for ngram in ngrams]
 
+def get_embedding_cloud(code_snippet: str):
+    url = settings.CODE_BERT_URL
+    headers = {'Authorization': f'Bearer {os.environ.get("DATABRICKS_OAUTH_TOKEN")}', 'Content-Type': 'application/json'}
+    ds_dict = {'input': code_snippet}
+    data_json = json.dumps(ds_dict, allow_nan=True)
+    response = requests.request(method='POST', headers=headers, url=url, data=data_json)
+    if response.status_code != 200:
+        raise Exception(f'Request failed with status {response.status_code}, {response.text}')
+    return response.json()    
 
 def get_embedding(code_snippet: str) -> Tuple[torch.Tensor, torch.Tensor]:
     """Generate embedding for a code snippet using CodeBERT/GraphCodeBERT."""
