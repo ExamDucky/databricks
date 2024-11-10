@@ -119,7 +119,7 @@ async def process_submission(file_path: str, submission_id) -> PlagiarismReport:
             other_code_embedding, other_graph_embedding = get_embedding(other_code)
             llm_similarity_code = cosine_similarity(code_embedding, other_code_embedding)          
             llm_similarity_graph = cosine_similarity(graph_embedding, other_graph_embedding)
-            if llm_similarity_code > 0.7:
+            if llm_similarity_code > 0.992:
                 llm_matches_code.append(PlagiarismResult(
                     submission_id=submission.split('/')[-2],
                     similarity_score=llm_similarity_code,
